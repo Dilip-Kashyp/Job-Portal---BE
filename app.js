@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
   })
 })
 
-const userRouter = require("./src/route/userRotuer");
+const userRouter = require("./src/route/userRotuer"); // update
 app.use("/api/v1/user", userRouter);
 
 
