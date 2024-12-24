@@ -1,0 +1,38 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code, and run tests
+# across different versions of Node.js using a self-hosted runner.
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "master" ]  # Trigger workflow on pushes to the "master" branch
+  pull_request:
+    branches: [ "master" ]  # Trigger workflow on pull requests targeting the "master" branch
+
+jobs:
+  build:
+    runs-on: self-hosted  # Change to self-hosted runner
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]  # Test across multiple Node.js versions
+
+    steps:
+      # Step 1: Check out the code from the repository
+      - uses: actions/checkout@v4
+
+      # Step 2: Set up the specified version of Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm istall
+
+      # Step 4: Build the project (if a build script exists)
+      - name: Build project
+        run: npm run build --if-present
+
