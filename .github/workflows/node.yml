@@ -30,7 +30,7 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm istall
+        run: npm install
 
       # Step 4: Build the project (if a build script exists)
       - name: Build project
