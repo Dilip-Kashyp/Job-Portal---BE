@@ -1,0 +1,42 @@
+name: Node.js CI with PM2
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-and-run:
+    runs-on: self-hosted  # Use self-hosted runner
+
+    steps:
+      # Step 1: Check out the code
+      - uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18  # Adjust this to match your Node.js version
+          cache: 'npm'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Build the project (optional, if your project has a build step)
+      - name: Build the project
+        run: npm run build --if-present
+
+      # Step 5: Install PM2 globally
+      - name: Install PM2 globally
+        run: npm install -g pm2
+
+      # Step 6: Start the application with PM2
+      - name: Start the application using PM2
+        run: pm2 start index.js   # Replace `app.js` with your entry point file
+
+      # Step 8: Display running processes
+      - name: List PM2 processes
+        run: pm2 list
