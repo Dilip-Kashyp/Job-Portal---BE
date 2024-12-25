@@ -32,7 +32,7 @@ jobs:
 
       # Step 6: Start the application with PM2
       - name: Start the application using PM2
-        run: pm2 start index.js -f
+        run: pm2 restart 0
 
       # Step 8: Display running processes
       - name: List PM2 processes
