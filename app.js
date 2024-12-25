@@ -2,8 +2,7 @@ const express = require("express");
 const cors = require('cors');
 const app = express(); 
 
-// const healthCheck = require('./route/healthCheck.js');
-// app.use("/healthcheck", healthCheck);
+
 app.use(express.json());
 app.use(cors());
 //home route
