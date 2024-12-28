@@ -36,7 +36,7 @@ jobs:
       # Step 6: Start or Restart the application using PM2
       - name: Start or Restart PM2 process
         run: |
-          pm2 start app.js --name "my-app" || pm2 restart "my-app"
+          pm2 start ecosystem.config.js --name "my-app" || pm2 restart "my-app"
 
       # Step 7: Display running processes
       - name: List PM2 processes
